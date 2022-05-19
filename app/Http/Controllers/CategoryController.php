@@ -5,24 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Spatie\Fractalistic\Fractal;
+use App\Transformers\CategoryTransformer;
 
 use App\Models\Category;
 
-use App\Transformers\CategoryTransformer;
-
 class CategoryController extends Controller
 {
-    public function list() {
-
+    public function list(): string
+    {
+        // get categories by tree
         $categories = Category::get()->toTree();
 
-        //echo json_encode($categories, JSON_PRETTY_PRINT);
-
-        $f = Fractal::create()
+        // transform via transformer and fractal
+        $data = Fractal::create()
             ->collection($categories)
             ->transformWith(new CategoryTransformer())
             ->toArray();
-            
-        echo json_encode($f, JSON_PRETTY_PRINT);
+        
+        // print
+        return json_encode($data, JSON_PRETTY_PRINT);
     }
 }

@@ -20,7 +20,10 @@ class Category extends Model implements HasMedia
         'title'
     ];
 
-    
+    public function products()
+    {
+        return $this->hasMany(\App\Models\Product::class);
+    }
 
     public function registerMediaCollections(): void
     {

@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        // create nested categories
         $cs = Category::factory(2)->create();
         foreach($cs as $c) {
             $cs2 = Category::factory(2)->create();
@@ -26,6 +27,8 @@ class CategorySeeder extends Seeder
                 }
             }
         }
+
+        // get categories to add images from picsum
         $categories = Category::get();
         $faker = Faker::create();
         foreach($categories as $category) {
@@ -34,7 +37,7 @@ class CategorySeeder extends Seeder
             $imageUrl = $faker->imageUrl($tw,$th, null, false);
             $category->addMediaFromUrl($imageUrl)->toMediaCollection('thumbnail');
 
-            for($i=1;$i<=5;$i++) {
+            for($i=1;$i<=4;$i++) {
                 $gw = mt_rand(1024, 1920);
                 $gh = mt_rand(1024, 1920);
                 $gImageUrl = $faker->imageUrl($gw,$gh, null, false);
