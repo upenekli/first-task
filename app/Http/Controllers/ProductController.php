@@ -8,7 +8,7 @@ use ElasticScoutDriverPlus\Support\Query;
 
 class ProductController extends Controller
 {
-    public function list(): string
+    public function list()
     {
         // prepare query for es
         $searchQuery = Query::wildcard()
@@ -23,6 +23,6 @@ class ProductController extends Controller
         $data = $searchResults->documents();
 
         // print
-        return json_encode($data, JSON_PRETTY_PRINT);
+        return response()->json($data);
     }
 }

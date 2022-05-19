@@ -11,7 +11,7 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function list(): string
+    public function list()
     {
         // get categories by tree
         $categories = Category::get()->toTree();
@@ -23,6 +23,6 @@ class CategoryController extends Controller
             ->toArray();
         
         // print
-        return json_encode($data, JSON_PRETTY_PRINT);
+        return response()->json($data);
     }
 }
